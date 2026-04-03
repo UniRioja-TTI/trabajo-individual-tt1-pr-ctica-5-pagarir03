@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mi-app-spring:
+    build: .
+    ports:
+      - "8085:8085"
+    networks:
+      - red-privada
+    environment:
+      - URL_MV=http://servicio-consumible:9090/Resultados
+
+  servicio-consumible:
+    image: javillour/servicio-tt1:amd64
+    networks:
+      - red-privada
+
+networks:
+  red-privada:
+    driver: bridge
